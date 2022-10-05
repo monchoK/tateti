@@ -1,9 +1,0 @@
-docker-compose if <nombredelarchivo.yml> up
-docker exec -it <nombredelcontenedor> bash
-dentro de la consoloa bash de docker:
-    iniciar el mysql:
-    mysql -h db -u root -p
-        contraseña: secret
-        dentro de mysql copiar lo del archivo tateti.sql
-        
-
