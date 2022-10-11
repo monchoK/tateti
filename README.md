@@ -33,11 +33,7 @@ Una vez dentro del mysql, copiar las instrucciones de [db.sql](db.sql)
 ## Iniciar entorno virtual
 
 ```bash
-. venv/bin/activate
-```
-
-Si no puede iniciar el entorno virtual, cree uno nuevo y ejecute la siguiente instrucción
-
-```bash
+python3 -m venv env
+. env/bin/activate
 pip install -r requirements
 ```
