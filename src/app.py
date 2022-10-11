@@ -10,7 +10,7 @@ conexion=MySQL(app)
 
 
 @app.route("/", methods=["GET"])
-def mostrar_tateti():
+def get_tateti():
         try:
                 cursor = conexion.connection.cursor()
                 cursor.execute("""SELECT * FROM users""")
