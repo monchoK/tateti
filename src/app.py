@@ -24,8 +24,6 @@ def get_tateti():
          
         except Exception as ex:
                 return jsonify({'mensaje': "Error", 'exito': False})
-        
-
 
 if __name__ == "__main__":
     app.config.from_object(config["development"]) #OPCIONES DE DESARROLLADOR PARA FLASK ESTA EN CONFIG DEVELOPMENTCONFIG
