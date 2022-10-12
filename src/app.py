@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
-from validaciones import *
+from validar import *
 
 from config import config
 
@@ -52,8 +52,8 @@ def leer_usuario(id):
 
 
 @app.route('/usuarios', methods=['POST'])
-def registrar_usuario():
-    # print(request.json)
+def post_usuarios():
+    
     if (validar_id(request.json['id']) and validar_names(request.json['names']) and validar_points(request.json['points'])):
         try:
             usuario = leer_usuario_bd(request.json['id'])
@@ -73,7 +73,7 @@ def registrar_usuario():
         return jsonify({'mensaje': "Parámetros inválidos...", 'exito': False})
 
 @app.route('/usuarios/<id>', methods=['DELETE'])
-def eliminar_usuario(id):
+def delete_usuarios(id):
     try:
         usuario = leer_usuario_bd(id)
         if usuario != None:
