@@ -7,7 +7,7 @@ def validar_names(names: str) -> bool:
     names = names.strip()
     return (len(names) > 0 and len(names) <= 30)
 
-# Valida que los puntos estén entre 1 y 9.
+# Valida que los puntos estén entre 1 y 99.
 def validar_points(points: str) -> bool:
     points_texto = str(points)
     if points_texto.isnumeric():

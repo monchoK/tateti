@@ -11,7 +11,7 @@ conexion=MySQL(app)
 
 
 @app.route("/", methods=["GET"])
-def get_tateti():
+def get_usuarios():
         try:
                 cursor = conexion.connection.cursor()
                 cursor.execute("""SELECT * FROM users""")
@@ -65,12 +65,27 @@ def registrar_usuario():
                 VALUES ('{0}', '{1}', {2})""".format(request.json['id'],
                                                      request.json['names'], request.json['points'])
                 cursor.execute(sql)
-                conexion.connection.commit()  # Confirma la acción de inserción.
+                conexion.connection.commit()  
                 return jsonify({'mensaje': "usuario registrado.", 'exito': True})
         except Exception as ex:
             return jsonify({'mensaje': "Error", 'exito': False})
     else:
         return jsonify({'mensaje': "Parámetros inválidos...", 'exito': False})
+
+@app.route('/usuarios/<id>', methods=['DELETE'])
+def eliminar_usuario(id):
+    try:
+        usuario = leer_usuario_bd(id)
+        if usuario != None:
+            cursor = conexion.connection.cursor()
+            sql = "DELETE FROM users WHERE id = '{0}'".format(id)
+            cursor.execute(sql)
+            conexion.connection.commit()  # Confirma la acción de eliminación.
+            return jsonify({'mensaje': "Usuario eliminado.", 'exito': True})
+        else:
+            return jsonify({'mensaje': "Usuario no encontrado.", 'exito': False})
+    except Exception as ex:
+        return jsonify({'mensaje': "Error", 'exito': False})
 
 
 if __name__ == "__main__":
