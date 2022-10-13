@@ -34,7 +34,7 @@ def crear(id, names, points):
     mycursor.execute(sql, valores)
     mydb.commit()
 def borrar(id):
-    sql = "DELETE FROM users WHERE id = '%s'"
-    valores (id,)
+    sql = "DELETE FROM users WHERE id = %s"
+    valores = (id,)
     mycursor.execute(sql,valores)
     mydb.commit()
