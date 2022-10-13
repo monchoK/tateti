@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 from validar import *
-
+import conector
 from config import config
 
 app=Flask(__name__)
@@ -13,14 +13,7 @@ conexion=MySQL(app)
 @app.route("/", methods=["GET"])
 def get_usuarios():
         try:
-                cursor = conexion.connection.cursor()
-                cursor.execute("""SELECT * FROM users""")
-                data = cursor.fetchall()
-
-                usuarios=[]
-                for fila in data:
-                        usuario ={"id":fila[0],"nombre":fila[1],"puntos":fila[2]}
-                        usuarios.append(usuario)
+                usuarios = conector.leer()
                 return jsonify({"mensaje":"lista de usuarios","usuarios":usuarios})
          
         except Exception as ex:
@@ -42,13 +35,13 @@ def leer_usuario_bd(id):
 @app.route('/usuarios/<id>', methods=['GET'])
 def leer_usuario(id):
     try:
-        usuario = leer_usuario_bd(id)
+        usuario = conector.leer_usuario(id)
         if usuario != None:
             return jsonify({'usuario': usuario, 'mensaje': "usuario encontrado.", 'exito': True})
         else:
-            return jsonify({'mensaje': "Uusuario no encontrado.", 'exito': False})
+            return jsonify({'mensaje': "Usuario no encontrado.", 'exito': False})
     except Exception as ex:
-        return jsonify({'mensaje': "Error", 'exito': False})
+        return jsonify({'mensaje': "Error", 'exito': False, 'usuario': usuario})
 
 
 @app.route('/usuarios', methods=['POST'])
@@ -60,12 +53,7 @@ def post_usuarios():
             if usuario != None:
                 return jsonify({'mensaje': "Usuario ya existe, no se puede duplicar.", 'exito': False})
             else:
-                cursor = conexion.connection.cursor()
-                sql = """INSERT INTO users (id, names, points) 
-                VALUES ('{0}', '{1}', {2})""".format(request.json['id'],
-                                                     request.json['names'], request.json['points'])
-                cursor.execute(sql)
-                conexion.connection.commit()  
+                conector.crear(request.json['id'], request.json['names'], request.json['points'])
                 return jsonify({'mensaje': "usuario registrado.", 'exito': True})
         except Exception as ex:
             return jsonify({'mensaje': "Error", 'exito': False})
@@ -75,8 +63,9 @@ def post_usuarios():
 @app.route('/usuarios/<id>', methods=['DELETE'])
 def delete_usuarios(id):
     try:
-        usuario = leer_usuario_bd(id)
+        usuario = conector.leer_usuario(id)
         if usuario != None:
+            # conector.borrar(id)
             cursor = conexion.connection.cursor()
             sql = "DELETE FROM users WHERE id = '{0}'".format(id)
             cursor.execute(sql)

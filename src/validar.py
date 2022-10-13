@@ -11,6 +11,6 @@ def validar_names(names: str) -> bool:
 def validar_points(points: str) -> bool:
     points_texto = str(points)
     if points_texto.isnumeric():
-        return (points >= 1 and points <= 99)
+        return (int(points) >= 1 and int(points) <= 99)
     else:
         return False
