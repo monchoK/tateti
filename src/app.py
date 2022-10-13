@@ -1,13 +1,11 @@
 
 from flask import Flask, jsonify, request
-from flask_mysqldb import MySQL
 from validar import *
 import conector
 from config import config
-
 app=Flask(__name__)
 
-conexion=MySQL(app)
+
 
 
 @app.route("/", methods=["GET"])
