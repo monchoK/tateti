@@ -17,7 +17,7 @@ def leer():
         usuarios.append(usuario)
     return usuarios
 def leer_usuario(id):
-    sql = "SELECT id, names, points FROM users WHERE id = %s"
+    sql = "SELECT id, names, points FROM users WHERE id = %s  "
     valores = (id,)
     mycursor.execute(sql,valores)
     datos = mycursor.fetchone()
@@ -25,6 +25,16 @@ def leer_usuario(id):
     if datos != None:
         usuario = {'id': datos[0], 'nombre': datos[1], 'puntos': datos[2]}
         return usuario
+def leer_usuario_nombre(names):
+    sql = "SELECT id, names, points FROM users WHERE names = %s  "
+    valores = (names,)
+    mycursor.execute(sql,valores)
+    datos = mycursor.fetchone()
+    print(datos)
+    if datos != None:
+        usuario = {'id': datos[0], 'nombre': datos[1], 'puntos': datos[2]}
+        return usuario
+
 def crear(names, points):
     
     sql = """INSERT INTO users (names, points) VALUES ( %s, %s)"""

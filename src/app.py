@@ -36,8 +36,12 @@ def post_usuarios():
     
     if (validar_names(request.json['names']) and validar_points(request.json['points'])):
         try:
-            conector.crear(request.json['names'], request.json['points'])
-            return jsonify({'mensaje': "usuario registrado.", 'exito': True})
+            usuario = conector.leer_usuario_nombre(request.json['names'])
+            if usuario != None:
+                return jsonify({'mensaje': "Usuario ya existe con este nombre.", 'exito': False})
+            else:
+                conector.crear(request.json['names'], request.json['points'])
+                return jsonify({'mensaje': "usuario registrado.", 'exito': True})
         except Exception as ex:
             return jsonify({'mensaje': "Error", 'exito': False})
     else:
