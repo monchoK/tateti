@@ -3,6 +3,8 @@ from flask import Flask, jsonify, request
 from validar import *
 import conector
 from config import config
+
+
 app=Flask(__name__)
 
 
@@ -57,8 +59,8 @@ def delete_usuarios(id):
     except Exception as ex:
         return jsonify({'mensaje': "Error", 'exito': False})
 
-
+ #OPCIONES DE DESARROLLADOR PARA FLASK ESTA EN CONFIG DEVELOPMENTCONFIG
 if __name__ == "__main__":
-    app.config.from_object(config["development"]) #OPCIONES DE DESARROLLADOR PARA FLASK ESTA EN CONFIG DEVELOPMENTCONFIG
+    app.config.from_object(config["development"])
 
     app.run()
