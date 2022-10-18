@@ -1,3 +1,51 @@
 *__pycache__
 env
 mycli.sh
+
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+tateti_app/.dart_tool/
+tateti_app/.flutter-plugins
+tateti_app/.flutter-plugins-dependencies
+tateti_app/.packages
+tateti_app/.pub-cache/
+tateti_app/.pub/
+tateti_app/build/
+
+# Web related
+tateti_app/lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+tateti_app/android/app/debug
+tateti_app/android/app/profile
+tateti_app/android/app/release
+tateti_app/pubspec.lock
