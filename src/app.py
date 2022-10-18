@@ -34,14 +34,10 @@ def leer_usuario(id):
 @app.route('/usuarios', methods=['POST'])
 def post_usuarios():
     
-    if (validar_id(request.json['id']) and validar_names(request.json['names']) and validar_points(request.json['points'])):
+    if (validar_names(request.json['names']) and validar_points(request.json['points'])):
         try:
-            usuario = conector.leer_usuario(request.json['id'])
-            if usuario != None:
-                return jsonify({'mensaje': "Usuario ya existe, no se puede duplicar.", 'exito': False})
-            else:
-                conector.crear(request.json['id'], request.json['names'], request.json['points'])
-                return jsonify({'mensaje': "usuario registrado.", 'exito': True})
+            conector.crear(request.json['names'], request.json['points'])
+            return jsonify({'mensaje': "usuario registrado.", 'exito': True})
         except Exception as ex:
             return jsonify({'mensaje': "Error", 'exito': False})
     else:
