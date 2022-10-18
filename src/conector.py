@@ -35,10 +35,10 @@ def leer_usuario_nombre(names):
         usuario = {'id': datos[0], 'nombre': datos[1], 'puntos': datos[2]}
         return usuario
 
-def crear(names, points):
+def crear(names):
     
-    sql = """INSERT INTO users (names, points) VALUES ( %s, %s)"""
-    valores = (names,points,)
+    sql = """INSERT INTO users (names, points) VALUES ( %s, 0)"""
+    valores = (names,)
 
     mycursor.execute(sql, valores)
     mydb.commit()
