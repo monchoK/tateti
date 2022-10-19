@@ -32,24 +32,22 @@ class _TatetiScreenState extends State<TatetiScreen> {
 
   Container espacio(BuildContext context, valor) {
     return Container(
-      color: Colors.grey.shade100,
-      child: TextButton(
-        child: Text(valor),
-        onPressed: () {
-          cambiar_valor(valor);
-        },
-      ),
-    );
+        color: Colors.grey.shade100,
+        child: TextButton(
+            child: Text(valor),
+            onPressed: () {
+              cambiarvalor(valor);
+            }));
   }
 
-  void cambiar_valor(valor) {
+  void cambiarvalor(valor) {
     if (valor == "") {
       valor = "x";
     }
   }
 
-  @override
   var valor = "";
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
