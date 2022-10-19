@@ -14,6 +14,7 @@ class _GetUsersState extends State<GetUsers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(title: const Text("USUARIOS")),
       body: FutureBuilder<Usuarios?>(
         future: ApisRequest().users,
@@ -25,9 +26,13 @@ class _GetUsersState extends State<GetUsers> {
           return ListView.builder(
               itemCount: users?.usuarios.length ?? 0,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(users!.usuarios[index].nombre),
-                  subtitle: Text("Puntos: ${users.usuarios[index].puntos}"),
+                return Container(
+                  margin: const EdgeInsets.all(10),
+                  color: Theme.of(context).primaryColor,
+                  child: ListTile(
+                    title: Text(users!.usuarios[index].nombre),
+                    subtitle: Text("Puntos: ${users.usuarios[index].puntos}"),
+                  ),
                 );
               });
         },
