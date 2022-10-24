@@ -36,14 +36,16 @@ class _TatetiScreenState extends State<TatetiScreen> {
         child: TextButton(
             child: Text(valor),
             onPressed: () {
+              child:
               cambiarvalor(valor);
             }));
   }
 
-  void cambiarvalor(valor) {
+  Future<void> cambiarvalor(valor) async {
     if (valor == "") {
       valor = "x";
     }
+    return valor;
   }
 
   var valor = "";
@@ -51,7 +53,8 @@ class _TatetiScreenState extends State<TatetiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        body: Center(
+        body: Container(
+          padding: EdgeInsets.all(50),
           child: tablero(context, valor),
         ));
   }
